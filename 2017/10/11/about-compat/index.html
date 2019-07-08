@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html style="display: none;" lang="zh">
-    <head>
+    <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <!--
         © Material Theme
@@ -52,14 +52,14 @@
     <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
     <link rel="icon" href="/img/favicon.png">
 
-    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="telephone=no">
     <meta name="description" itemprop="description" content="世上所有的坚持 都是因为热爱">
     <meta name="keywords" content="null,Android">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -247,7 +247,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://zhuyilin10.github.io/2017/10/11/about-compat/index.html" />
+        <link rel="canonical" href="http://zhuyilin10.github.io/2017/10/11/about-compat/index.html">
     
 
     <!-- Structured-data for SEO -->
@@ -481,11 +481,11 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>终于合并了上次做的 Adaptive Icon 的分支，但发现服务器跑不过去，一看是由于没有升级 gradle 等对应配置文件的问题。<br>当升级过后，发现了一个很大的问题。我们早早使用了 SVG 作为图片资源文件，取代了体积较大的 .png 文件。一直以来的做法是<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line"> <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line"> <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>          </div><div class="line"> <span class="attr">android:src</span>=<span class="string">"@drawable/xxxxxxxx"</span> /&gt;</div></pre></td></tr></table></figure></p>
-<p>但现在发现我们的用法是错误的。经过踩坑简单记录一下正确的方法，可以解决向下兼容性问题。<br>首先，需要在 build.gradle 配置文件中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">defaultConfig &#123;</div><div class="line">        vectorDrawables.useSupportLibrary = true</div><div class="line">      &#125;</div></pre></td></tr></table></figure></p>
-<p>然后引入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile &apos;com.android.support:appcompat-v7:26.1.0&apos;</div></pre></td></tr></table></figure></p>
-<p>第三步就是将 ImageView 属性设置为如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">ImageView</span></span></div><div class="line"> <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></div><div class="line"> <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>          </div><div class="line"> <span class="attr">app:srcCompat</span>=<span class="string">"@drawable/xxxxxxxx"</span> /&gt;</div></pre></td></tr></table></figure></p>
-<p>到此为低版本加载 SVG 的方法。当然 Android 5.0 以上不存在这个问题。<br>另外提一句，这一切是在 Activity 父类为 AppCompatActivity 的情况下进行，如果 Activity 继承自 Activity，那么应该使用 android.support.v7.widget.AppCompatImageView, 因为当使用 AppCompatActivity 时会自动将 ImageView 包装为 AppCompatImageView。<br>另一个问题就是 Textview 显示 SVG 图片的问题，这是使用比较多的地方，我们在使用 android:drawableRight 属性的时候会倒入 SVG 图像，但是这样做的结果就是低版本的奔溃。事实上，AppCompatTextView 是没有对 CompoundDrawable 进行适配的，所以我们的解决方法是代码手工写，判断系统版本如果小于5.0，就用 ContextCompat.getDrawable 获取到 Drawable 实例，再 setCompoundDrawablesWithIntrinsicBounds。建议自己定义一个 TextView，免去手写烦恼，为了节省时间，我用了一个开源库， <a href="https://github.com/woxingxiao/VectorCompatTextView" target="_blank" rel="external">VectorCompatTextView</a>，谢谢作者分享这个库。<br>当然我说的 ContextCompat.getDrawable 获取到 Drawable 实例然后赋值的方法是最好用的方法，当个别 XML 解决不了的时候, 如 ImageView 想设置 background 但没有那么一个叫做 backgroundCompat 属性的时候建议这样写。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">imageView.background = ContextCompat.getDrawable(context, R.drawable.xxxxxxxx)</div></pre></td></tr></table></figure></p>
+        <p>终于合并了上次做的 Adaptive Icon 的分支，但发现服务器跑不过去，一看是由于没有升级 gradle 等对应配置文件的问题。<br>当升级过后，发现了一个很大的问题。我们早早使用了 SVG 作为图片资源文件，取代了体积较大的 .png 文件。一直以来的做法是<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>          </span></span><br><span class="line"><span class="tag"> <span class="attr">android:src</span>=<span class="string">"@drawable/xxxxxxxx"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>但现在发现我们的用法是错误的。经过踩坑简单记录一下正确的方法，可以解决向下兼容性问题。<br>首先，需要在 build.gradle 配置文件中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">defaultConfig &#123;</span><br><span class="line">        vectorDrawables.useSupportLibrary = true</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后引入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;com.android.support:appcompat-v7:26.1.0&apos;</span><br></pre></td></tr></table></figure></p>
+<p>第三步就是将 ImageView 属性设置为如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span>          </span></span><br><span class="line"><span class="tag"> <span class="attr">app:srcCompat</span>=<span class="string">"@drawable/xxxxxxxx"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>到此为低版本加载 SVG 的方法。当然 Android 5.0 以上不存在这个问题。<br>另外提一句，这一切是在 Activity 父类为 AppCompatActivity 的情况下进行，如果 Activity 继承自 Activity，那么应该使用 android.support.v7.widget.AppCompatImageView, 因为当使用 AppCompatActivity 时会自动将 ImageView 包装为 AppCompatImageView。<br>另一个问题就是 Textview 显示 SVG 图片的问题，这是使用比较多的地方，我们在使用 android:drawableRight 属性的时候会倒入 SVG 图像，但是这样做的结果就是低版本的奔溃。事实上，AppCompatTextView 是没有对 CompoundDrawable 进行适配的，所以我们的解决方法是代码手工写，判断系统版本如果小于5.0，就用 ContextCompat.getDrawable 获取到 Drawable 实例，再 setCompoundDrawablesWithIntrinsicBounds。建议自己定义一个 TextView，免去手写烦恼，为了节省时间，我用了一个开源库， <a href="https://github.com/woxingxiao/VectorCompatTextView" target="_blank" rel="noopener">VectorCompatTextView</a>，谢谢作者分享这个库。<br>当然我说的 ContextCompat.getDrawable 获取到 Drawable 实例然后赋值的方法是最好用的方法，当个别 XML 解决不了的时候, 如 ImageView 想设置 background 但没有那么一个叫做 backgroundCompat 属性的时候建议这样写。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imageView.background = ContextCompat.getDrawable(context, R.drawable.xxxxxxxx)</span><br></pre></td></tr></table></figure></p>
 <p>当然今天只是简单记录一下，这几天有一些东西需要记录，包括多渠道打包配置文件，还有 Linux 安装体验，包括重装系统后恢复 blog 的记录。</p>
 
         
@@ -613,7 +613,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/archives/2019/07/">七月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         

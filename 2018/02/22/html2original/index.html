@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html style="display: none;" lang="zh">
-    <head>
+    <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
     <!--
         © Material Theme
@@ -52,14 +52,14 @@
     <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
     <link rel="icon" href="/img/favicon.png">
 
-    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="telephone=no">
     <meta name="description" itemprop="description" content="世上所有的坚持 都是因为热爱">
     <meta name="keywords" content="null,Android">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -247,7 +247,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://zhuyilin10.github.io/2018/02/22/html2original/index.html" />
+        <link rel="canonical" href="http://zhuyilin10.github.io/2018/02/22/html2original/index.html">
     
 
     <!-- Structured-data for SEO -->
@@ -481,9 +481,9 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>这篇总结博客想写很久了，一直没空动笔，很羞愧。今天终于有空坐下来，2018年的第一篇技术总结，写写2017年下半年花了很多心思做的使用原生取代 WebView，也就是原生实现图文混排及交互的功能。<br>我们公司是做英语作业平台的，所以我们的核心功能就是试卷，学生们通过我们的软件完成填空题，选择题，文本题等各种题型。在以往我们的试卷部分是通过 WebView 由前端开发的同事写好交互，我们通过调用 JS 代码来实现功能，但我一直对于这样的混合开发保持怀疑，毕竟对于手机，尤其是碎片化严重的 Android 来说，不同的系统版本不同的厂家甚至不同的用户习惯都会带来 WebView 性能差甚至加载出现问题的情况，所以我们的项目实现原生图文混排及交互的功能势在必行。<br>原生图文混排及交互，也就是富文本。iOS 的同事在拿到这个任务的时候选择了 iOS 著名的富文本库 <a href="https://github.com/ibireme/YYText" target="_blank" rel="external">YYText</a>，而负责 Android 端的我选择了使用原生 TextView 来实现，使用 SpannableString 以及 SpannableStringBuilder 来构造。<br>SpannableString 与 SpannableStringBuilder 是非常强大的，我们对于 TextView 所想实现的所有功能和样式几乎都可以通过它来完成。最简单的例子就是多种颜色的一段文字。<br>如图所示。<br><img src="https://ws1.sinaimg.cn/large/af31670dgy1fople7zmr8j20ma14u75o.jpg" alt="多种颜色文字"><br>如果是针对整个 TextView 来设置颜色是无法达到这样的效果的，我们需要用 SpannableString 设置不同的 span 后拼接，这样可以达到这样的效果。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">val textView = findViewById&lt;TextView&gt;(R.id.sample_text)</div><div class="line">val spannableStringBuilder = SpannableStringBuilder()</div><div class="line"></div><div class="line">val blueString = SpannableString(<span class="string">"Hello"</span>)</div><div class="line">blueString.setSpan(ForegroundColorSpan(ContextCompat.getColor(<span class="keyword">this</span>, R.color.colorPrimary)), <span class="number">0</span>, blueString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)</div><div class="line">spannableStringBuilder.append(blueString)</div><div class="line"></div><div class="line">val redString = SpannableString(<span class="string">"Hello"</span>)</div><div class="line">redString.setSpan(ForegroundColorSpan(ContextCompat.getColor(<span class="keyword">this</span>, R.color.colorAccent)), <span class="number">0</span>, redString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)</div><div class="line">spannableStringBuilder.append(redString)</div><div class="line"></div><div class="line">textView.text = spannableStringBuilder</div></pre></td></tr></table></figure></p>
-<p>这里需要提及的是 setSpan 这个方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setSpan(Object what, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> flags)</div></pre></td></tr></table></figure></p>
-<p>这里备注一下几个参数对应的含义。<br>第一个参数 Object what 指的是我们需要设置的 Span 的类型，如我们显示字体颜色的 ForegroundColorSpan；<br>第二个参数 int start 以及第三个参数 int end 指的是我们对于这段 spannableString 设置样式的起始位置；<br>而第三个参数也就是 flag 的取值如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Spannable. SPAN_INCLUSIVE_EXCLUSIVE：前面包括，后面不包括，即在文本前插入新的文本会应用该样式，而在文本后插入新文本不会应用该样式</div><div class="line">Spannable. SPAN_INCLUSIVE_INCLUSIVE：前面包括，后面包括，即在文本前插入新的文本会应用该样式，而在文本后插入新文本也会应用该样式</div><div class="line">Spannable. SPAN_EXCLUSIVE_EXCLUSIVE：前面不包括，后面不包括</div><div class="line">Spannable. SPAN_EXCLUSIVE_INCLUSIVE：前面不包括，后面包括</div></pre></td></tr></table></figure></p>
+        <p>这篇总结博客想写很久了，一直没空动笔，很羞愧。今天终于有空坐下来，2018年的第一篇技术总结，写写2017年下半年花了很多心思做的使用原生取代 WebView，也就是原生实现图文混排及交互的功能。<br>我们公司是做英语作业平台的，所以我们的核心功能就是试卷，学生们通过我们的软件完成填空题，选择题，文本题等各种题型。在以往我们的试卷部分是通过 WebView 由前端开发的同事写好交互，我们通过调用 JS 代码来实现功能，但我一直对于这样的混合开发保持怀疑，毕竟对于手机，尤其是碎片化严重的 Android 来说，不同的系统版本不同的厂家甚至不同的用户习惯都会带来 WebView 性能差甚至加载出现问题的情况，所以我们的项目实现原生图文混排及交互的功能势在必行。<br>原生图文混排及交互，也就是富文本。iOS 的同事在拿到这个任务的时候选择了 iOS 著名的富文本库 <a href="https://github.com/ibireme/YYText" target="_blank" rel="noopener">YYText</a>，而负责 Android 端的我选择了使用原生 TextView 来实现，使用 SpannableString 以及 SpannableStringBuilder 来构造。<br>SpannableString 与 SpannableStringBuilder 是非常强大的，我们对于 TextView 所想实现的所有功能和样式几乎都可以通过它来完成。最简单的例子就是多种颜色的一段文字。<br>如图所示。<br><img src="https://ws1.sinaimg.cn/large/af31670dgy1fople7zmr8j20ma14u75o.jpg" alt="多种颜色文字"><br>如果是针对整个 TextView 来设置颜色是无法达到这样的效果的，我们需要用 SpannableString 设置不同的 span 后拼接，这样可以达到这样的效果。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">val textView = findViewById&lt;TextView&gt;(R.id.sample_text)</span><br><span class="line">val spannableStringBuilder = SpannableStringBuilder()</span><br><span class="line"></span><br><span class="line">val blueString = SpannableString(<span class="string">"Hello"</span>)</span><br><span class="line">blueString.setSpan(ForegroundColorSpan(ContextCompat.getColor(<span class="keyword">this</span>, R.color.colorPrimary)), <span class="number">0</span>, blueString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)</span><br><span class="line">spannableStringBuilder.append(blueString)</span><br><span class="line"></span><br><span class="line">val redString = SpannableString(<span class="string">"Hello"</span>)</span><br><span class="line">redString.setSpan(ForegroundColorSpan(ContextCompat.getColor(<span class="keyword">this</span>, R.color.colorAccent)), <span class="number">0</span>, redString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)</span><br><span class="line">spannableStringBuilder.append(redString)</span><br><span class="line"></span><br><span class="line">textView.text = spannableStringBuilder</span><br></pre></td></tr></table></figure></p>
+<p>这里需要提及的是 setSpan 这个方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setSpan(Object what, <span class="keyword">int</span> start, <span class="keyword">int</span> end, <span class="keyword">int</span> flags)</span><br></pre></td></tr></table></figure></p>
+<p>这里备注一下几个参数对应的含义。<br>第一个参数 Object what 指的是我们需要设置的 Span 的类型，如我们显示字体颜色的 ForegroundColorSpan；<br>第二个参数 int start 以及第三个参数 int end 指的是我们对于这段 spannableString 设置样式的起始位置；<br>而第三个参数也就是 flag 的取值如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Spannable. SPAN_INCLUSIVE_EXCLUSIVE：前面包括，后面不包括，即在文本前插入新的文本会应用该样式，而在文本后插入新文本不会应用该样式</span><br><span class="line">Spannable. SPAN_INCLUSIVE_INCLUSIVE：前面包括，后面包括，即在文本前插入新的文本会应用该样式，而在文本后插入新文本也会应用该样式</span><br><span class="line">Spannable. SPAN_EXCLUSIVE_EXCLUSIVE：前面不包括，后面不包括</span><br><span class="line">Spannable. SPAN_EXCLUSIVE_INCLUSIVE：前面不包括，后面包括</span><br></pre></td></tr></table></figure></p>
 <p>这样就可以基本实现通过设置 span 来达到不同的效果。<br>这是使用 span 的总结第一篇，为自己后面列个提纲</p>
 <ol>
 <li>ImageSpan 包括 本地图片用法 网络图片用法 Data Base64图片加载方法</li>
@@ -617,7 +617,7 @@
             </a>
             <ul class="dropdown-menu">
             <li>
-                <a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a>
+                <a class="sidebar_archives-link" href="/archives/2019/07/">七月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/07/">七月 2017<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/12/">十二月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/11/">十一月 2016<span class="sidebar_archives-count">2</span></a>
             </ul>
         </li>
         
