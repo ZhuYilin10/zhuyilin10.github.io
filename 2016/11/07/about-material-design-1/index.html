@@ -1,21 +1,11 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang=zh>
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Zhu Yilin">
-  <meta name="keywords" content="">
-  
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="首先，安利我最喜欢的手机品牌： HTC。2012年我高中毕业的暑假，入手了第一款 Android 智能手机——HTC的one S，这是一款非常让人心动的产品，双核 + 1G内存的配置在那个时代也是仅次于诸如三星s3、HTC one X等旗舰的存在，但相比于同学手中的iOS，我们不得不承认，即使是以华丽而著称的Sense UI，也是足够的简陋，更不用说原生UI。Android 总有那么多让我不满意的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Material Design 学习笔记 1">
@@ -27,254 +17,138 @@
 <meta property="article:modified_time" content="2023-03-20T02:44:47.296Z">
 <meta property="article:author" content="Zhu Yilin">
 <meta property="article:tag" content="Android">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>Material Design 学习笔记 1 - ZhuYilin&#39;s Blog</title>
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Material Design 学习笔记 1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"zhuyilin10.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2016/12/15/about-material-design-2/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2016/11/06/additional-cursor/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&text=Material Design 学习笔记 1"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&is_video=false&description=Material Design 学习笔记 1"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Material Design 学习笔记 1&body=Check out this article: http://zhuyilin10.github.io/2016/11/07/about-material-design-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&name=Material Design 学习笔记 1&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&t=Material Design 学习笔记 1"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-<body>
-  
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%91%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">译文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Material-Design-%E7%9A%84%E7%9C%9F%E6%AD%A3%E4%BB%B7%E5%80%BC"><span class="toc-number">1.1.</span> <span class="toc-text">Material Design 的真正价值</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
 
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
+    <h1 class="posttitle" itemprop="name headline">
+        Material Design 学习笔记 1
+    </h1>
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
-    </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Zhu Yilin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2016-11-07T07:31:25.000Z" itemprop="datePublished">2016-11-07</time>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
-        
-      </ul>
+      
     </div>
-  </div>
-</nav>
 
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>
+    </div>
+
+
+    </div>
+  </header>
   
 
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="Material Design 学习笔记 1"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2016-11-07 15:31" pubdate>
-          2016年11月7日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          4k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          34 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
-      
-    </div>
-  </div>
-</div>
-
-</div>
-
-  </header>
-
-  <main>
-    
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Material Design 学习笔记 1</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <p>首先，安利我最喜欢的手机品牌： HTC。<br>2012年我高中毕业的暑假，入手了第一款 Android 智能手机——HTC的one S，这是一款非常让人心动的产品，双核 + 1G内存的配置在那个时代也是仅次于诸如三星s3、HTC one X等旗舰的存在，但相比于同学手中的iOS，我们不得不承认，即使是以华丽而著称的Sense UI，也是足够的简陋，更不用说原生UI。Android 总有那么多让我不满意的地方，还好Android可以刷机，百度云ROM是我刷的第一个ROM，当然还有以后的MIUI。<br>好了，以上都是废话，我想表达的只是那个时候的 Android 真的很不好看，或者说。。。丑陋。<br>所以当Google 2013年 I／O大会公布了全新设计风格 —— Material Design，我的感觉只有“惊艳”能形容。<br>当然，后来由于对 Android 的执着和喜爱，我也成为了一名 Android 开发。并且在毕业设计，一款名叫《小白》的应用中把自己对Material Design 简陋的理解用了上去（真的很简陋，没有美工的痛啊…）。<br>刚刚进入公司的时候，公司的 Android 应用也是采用了与 iOS 相符的设计，后来新风格改版，采用了 Material Design。这次的改版也让我更加深入地去了解 Material Design 的开发，包括 Android Design Support Library 等的使用。<br>在学习的过程中我翻译了一篇有关于 Material Design 的文章。</p>
+  <div class="content" itemprop="articleBody">
+    <p>首先，安利我最喜欢的手机品牌： HTC。<br>2012年我高中毕业的暑假，入手了第一款 Android 智能手机——HTC的one S，这是一款非常让人心动的产品，双核 + 1G内存的配置在那个时代也是仅次于诸如三星s3、HTC one X等旗舰的存在，但相比于同学手中的iOS，我们不得不承认，即使是以华丽而著称的Sense UI，也是足够的简陋，更不用说原生UI。Android 总有那么多让我不满意的地方，还好Android可以刷机，百度云ROM是我刷的第一个ROM，当然还有以后的MIUI。<br>好了，以上都是废话，我想表达的只是那个时候的 Android 真的很不好看，或者说。。。丑陋。<br>所以当Google 2013年 I／O大会公布了全新设计风格 —— Material Design，我的感觉只有“惊艳”能形容。<br>当然，后来由于对 Android 的执着和喜爱，我也成为了一名 Android 开发。并且在毕业设计，一款名叫《小白》的应用中把自己对Material Design 简陋的理解用了上去（真的很简陋，没有美工的痛啊…）。<br>刚刚进入公司的时候，公司的 Android 应用也是采用了与 iOS 相符的设计，后来新风格改版，采用了 Material Design。这次的改版也让我更加深入地去了解 Material Design 的开发，包括 Android Design Support Library 等的使用。<br>在学习的过程中我翻译了一篇有关于 Material Design 的文章。</p>
 <h2 id="译文"><a href="#译文" class="headerlink" title="译文"></a>译文</h2><h3 id="Material-Design-的真正价值"><a href="#Material-Design-的真正价值" class="headerlink" title="Material Design 的真正价值"></a>Material Design 的真正价值</h3><p>Google 的 Material Design 在设计中是最有影响力的一种视觉理念。因为明确 了设计和可用性指南，它成为塑造人们看到并与接口交互的方式。<br>但是，Material Design 已经超越了 Google 和 Android 程序本身。<br>设计师们在很多层面使用这种设计理念——尤其是分层接口的概念。顾名思义， 也就是分层叠加多个元素。就好像一副卡片，要创造一个单一而又统一的体验，那 就是功能性和美观性。<br>让我们来谈谈 Material Design。<br>分层的概念元素在一个接口并不是一个新概念。然而,Material Design 则更进 一步,触觉体验结合大胆的和充满活力的审美。<br>在我们继续之前，让我们先确认一下我们在同样的页面上什么是 Material Design。让我们来看一下:<br>Material Design 是 Google 的一种设计理念，它概述了在移动设备上应用程序 应该如何工作。他打破了一切——包括动画、风格、布局，给了模式、组件和可用 性以指导。<br>Google 是这么说的:“我们挑战了自己，为我们的用户创造了一个综合好的设 计的经典原则的创新的设计语言和科技的可行性。这就是 Material Design。”<br>Material Design 开始于手机，但很快就扩展到其他设备上。它包括以下几个原则:<br>1.现实的视觉元素:设计就是基于现实，就好像在用纸张和墨水进行设计。<br>2.大胆的、形象的和故意的:基本设计技术驱动了视觉效果，排版、网格、空 间、比例、颜色和图像主导着整个设计，理论建立在一个用清晰的层次结构定义了 的空间上，颜色和类型的选择是大胆的而又经过深思熟虑的。<br>3.手势提供了意义:动画是 Material Design 的一个关键的组成部分，但它不 能仅仅为了移动而动。动画需要发生在一个单独的环境,重点设计和服务于包括简 单和容易的转换。动作和手势应该客观的反映物理世界。</p>
 <p>理解“触觉表面”的含义</p>
 <p>还有一个我们经常在布局接口会谈论到的事情是“触觉表面”。 我们可以想象一下很多张纸叠在一起来构造一个框架来进行设计是如何实现<br>的。这些纸和现实生活中的纸还是有点不同的，因为他们的形状和形式可以任意修<br>改——如拉伸和弯曲——但他们以一种看似真实的方式工作着。<br>如一篇文章《Mobile Design Trends 2015 &amp; 2016》中提到的，把触觉表面当 做一个容器来容纳信息。在设计中容器本身是平的，但有一个淡淡的阴影来区别其 他的容器和分层。当然还有其他方法来在层级之间做间隔——比如纹理和渐变—— 当然这其实是没必要的。<br>以一个很好的 app Reddit 为例，你可以清晰地看见它层级之间的分隔。有一个 冒险的顶级菜单层包含着主要内容，甚至是分层的主要顶部图像包含元素和阴影强 调三维触觉表面。<br>据文章《Android Lollipop UI Kit》证明:一个触觉表面可以清晰地确定内容 在设计方面的功能和联系(每一个容器都有自己的本质工作，比如说一个链接或者 一个视频播放器)。这种方法同样建立了深度，因为其他容器元素是分层的，由此 创建了一个三维世界</p>
@@ -285,351 +159,138 @@
 <p>谁是下一个?</p>
 <p>Google 在 7 月发布了几个新的指导方针，Material Design Lite，由此，所有 设计人员都可以使他们的网站或者应用程序看起来像 Android 程序。<br>就像《Mobile Design Trends 2015 &amp; 2016》一书中建议的那样，我们可能会<br>越来越多的看到 Android 的特点，可能甚至会在 ios 应用和别的地方。Material Design 看起来非常的不错，而且他在很多地方表现的非常好。设计者将会利用 lite 版本提供的完美指导水平。<br>Material Design Lite 也是一种很好的工具,可以让设计人员和开发人员想要 创建一个统一的应用体验整个 Android 和 iOS 平台时使用，让应用看起来和使用起 来有一致的用户体验，哪怕在不同的设备上面。<br>图层一定会停留一段时间，但是整体可能看起来会是更分层以及更少的材料。 所以那种设计会间与 Material Design Lite 和 ios 的设计标准之间。<br>ios 的应用 Weather Channel 已经使用了这种方法。整个应用基于卡片、色彩 和图像，在卡片的使用、图像的几何形状方面等方面理论是重叠的。因为缺乏深度 和模仿导致整个 app 看起来更加可以修改。<br>渐变和单色的图层也在以另一种方式增长着。Monochromatic color palettes 是一个经典的设计技术，它使得创建的元素几乎可以适用于任何类型的内容。<br>ios 应用 Elevate 使用了一个渐变的背景在它的设计上，它的动画和运动形态 非常符合 Material Design 的标准，当然，使用渐变色不是。这个简单的亮点使得 使得设计开始打破传统的规则而不影响其原有的功能。<br>设计师们会在更深的颜色和色调方面继续发扬分层接口和 Material Design。 现在多数的 app 都采用了浅色和白色的设计风格，但更多的深色风格即将出现。<br>Weather TimeLiness 就是一个很好的例子。简单的改变颜色就足以使这款应用 脱颖而出。它分层的风格非常明显，但深色界面使得它看起来简洁而又优雅。整个 设计看起来更饱和、缓和和具有深色的审美。<br>顺便说一句。今天这样的分层接口设计仍然只是一个开始，作为设计师成长的 一部分，简单的视觉风格和高可用性的设计风格仍然会继续出现，不仅仅是在 Android 上，而是会引领整个潮流。更有趣的是，分层界面的外观本身就是一个可 扩展的设计技术，在未来几年，包括极简主义和平面设计主义在内的设计风格将会 变得越来越流行。<br>在某种程度上，这种设计风格可能会撼动那些拟物化的设计风格很多，但那些 事情发生之前，这个概念似乎已经完全站稳了脚跟，变得真实。</p>
 
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Android/">#Android</a>
-      
-    </div>
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>Material Design 学习笔记 1</div>
-      <div>http://zhuyilin10.github.io/2016/11/07/about-material-design-1/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Zhu Yilin</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2016年11月7日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
   </div>
+</article>
 
 
 
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2016/12/15/about-material-design-2/" title="Material Design 学习笔记 2">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Material Design 学习笔记 2</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2016/11/06/additional-cursor/" title="几天前写的比较">
-                        <span class="hidden-mobile">几天前写的比较</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
 
-            
-          </article>
-        </div>
-      </div>
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li>
+        
+      </ul>
     </div>
 
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%91%E6%96%87"><span class="toc-number">1.</span> <span class="toc-text">译文</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Material-Design-%E7%9A%84%E7%9C%9F%E6%AD%A3%E4%BB%B7%E5%80%BC"><span class="toc-number">1.1.</span> <span class="toc-text">Material Design 的真正价值</span></a></li></ol></li></ol>
+    </div>
 
-
-
-  </aside>
-
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&text=Material Design 学习笔记 1"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&is_video=false&description=Material Design 学习笔记 1"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Material Design 学习笔记 1&body=Check out this article: http://zhuyilin10.github.io/2016/11/07/about-material-design-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&title=Material Design 学习笔记 1"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&name=Material Design 学习笔记 1&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2016/11/07/about-material-design-1/&t=Material Design 学习笔记 1"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
   </div>
 </div>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-
     
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
-    </div>
+    2016-2023
+    Zhu Yilin
   </div>
-</div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
 
-    
-
-    
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
     </div>
-  
-  
-  
-  
-</div>
+    <!-- styles -->
 
-  </footer>
 
-  <!-- Scripts -->
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
     })
+  })
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Umami Analytics -->
 
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>

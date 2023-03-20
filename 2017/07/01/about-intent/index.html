@@ -1,21 +1,11 @@
-
-
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=auto>
-
-
-
+<html lang=zh>
 <head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  
-  <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="Zhu Yilin">
-  <meta name="keywords" content="">
-  
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="忽然发现，半年没有更新过 Blog 了。。。。。好尴尬，本来这个用来记录自己技术的平台是打算每月至少更新一两次，记录一下这段时间的收获的，可是由于懒散和换了电脑后环境的问题，一直没有继续写。今天谈一下 Intent 的隐式启动。这是一个很入门级的问题，但由于之前没用过所以也没管过，既然上周做了今天就写一下自己的体验。Intent 是平时最常用的组件，我们平时用于页面跳转的就是显示 Intent。例">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有关于 Android 隐式启动 Activity">
@@ -27,614 +17,285 @@
 <meta property="article:modified_time" content="2023-03-20T02:44:47.296Z">
 <meta property="article:author" content="Zhu Yilin">
 <meta property="article:tag" content="Android">
-<meta name="twitter:card" content="summary_large_image">
-  
-  
-  
-  <title>有关于 Android 隐式启动 Activity - ZhuYilin&#39;s Blog</title>
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>有关于 Android 隐式启动 Activity</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
-  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
-
-
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
-
-  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
-
-
-
-<!-- 主题依赖的图标库，不要自行修改 -->
-<!-- Do not modify the link that theme dependent icons -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-
-  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
-  
-    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
-  
-
-
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"zhuyilin10.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
-
-    if (CONFIG.web_analytics.follow_dnt) {
-      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
-      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
-    }
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-  
-
-
-  
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
 <meta name="generator" content="Hexo 6.3.0"></head>
 
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2017/09/12/about-oreo-1/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2016/12/31/about-my-career-2016/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2017/07/01/about-intent/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&text=有关于 Android 隐式启动 Activity"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&is_video=false&description=有关于 Android 隐式启动 Activity"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=有关于 Android 隐式启动 Activity&body=Check out this article: http://zhuyilin10.github.io/2017/07/01/about-intent/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&name=有关于 Android 隐式启动 Activity&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2017/07/01/about-intent/&t=有关于 Android 隐式启动 Activity"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-<body>
-  
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
 
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header>
     
+    <h1 class="posttitle" itemprop="name headline">
+        有关于 Android 隐式启动 Activity
+    </h1>
 
-<div class="header-inner" style="height: 70vh;">
-  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand" href="/">
-      <strong>Fluid</strong>
-    </a>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
 
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Zhu Yilin</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-07-01T06:35:08.000Z" itemprop="datePublished">2017-07-01</time>
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                <span>首页</span>
-              </a>
-            </li>
-          
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/Android/" rel="tag">Android</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>忽然发现，半年没有更新过 Blog 了。。。。。<br>好尴尬，本来这个用来记录自己技术的平台是打算每月至少更新一两次，记录一下这段时间的收获的，可是由于懒散和换了电脑后环境的问题，一直没有继续写。<br>今天谈一下 Intent 的隐式启动。<br>这是一个很入门级的问题，但由于之前没用过所以也没管过，既然上周做了今天就写一下自己的体验。<br>Intent 是平时最常用的组件，我们平时用于页面跳转的就是显示 Intent。<br>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">val</span> <span class="variable">intent</span> <span class="operator">=</span> Intent(<span class="built_in">this</span>, SecondActivity::class.java)</span><br><span class="line">intent.putExtra(<span class="string">&quot;.....&quot;</span>, ......)</span><br><span class="line">startActivity(intent)</span><br></pre></td></tr></table></figure>
+<p>而隐式启动则是通过 url 的跳转来实现的。<br>首先是 url 的结构。<br>虽然我们不是做网页的但是我们要明白，一个完整的 url 是由哪几部分构成的。<br>url一般主要由Schema、Host、Path以及QueryParameter等构成。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Schema 访问协议</span><br><span class="line"></span><br><span class="line">Host 域名</span><br><span class="line"></span><br><span class="line">port 端口</span><br><span class="line"></span><br><span class="line">pathName 路径名</span><br><span class="line"></span><br><span class="line">QueryParameter 查询参数</span><br></pre></td></tr></table></figure>
+<p>我们使用 intent.data 可以接收到这个uri。<br>这里要提一下 uri 和 url 的区别。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">首先，URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</span><br><span class="line">而URL是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</span><br><span class="line">而URN，uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。</span><br><span class="line">也就是说，URI是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。</span><br><span class="line"></span><br><span class="line">在Java的URI中，一个URI实例可以代表绝对的，也可以是相对的，只要它符合URI的语法规则。而URL类则不仅符合语义，还包含了定位该资源的信息，因此它不能是相对的，schema必须被指定。</span><br></pre></td></tr></table></figure>
+<p>我们使用 intent.data 接收到的是一个 Uri 的对象，我们可以通过该对象获取到我们需要的信息。<br>我的做法是建立一个 UrlDispatcher，在 application 中初始化，用来接受和处理 url。<br>要实现隐式跳转的第一步就是在清单文件中注册 Intent 过滤器。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">activity</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:name</span>=<span class="string">&quot;.ui.common.account.UserNameActivity&quot;</span></span></span><br><span class="line"><span class="tag">   <span class="attr">android:launchMode</span>=<span class="string">&quot;singleTop&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.VIEW&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.BROWSABLE&quot;</span>/&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.DEFAULT&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:scheme</span>=<span class="string">&quot;zhuyl&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">activity</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这样我们就可以接收到域名协议为 zhuyl 的 url 了。<br>再来看看我们的 UrlDispatcher。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> actions: MutableMap&lt;String, (MutableMap&lt;String, String&gt;) -&gt; Unit&gt; = HashMap()</span><br><span class="line"><span class="type">val</span> <span class="variable">url</span> <span class="operator">=</span> uri.host + uri.path</span><br><span class="line"><span class="type">val</span> <span class="variable">action</span> <span class="operator">=</span> <span class="keyword">if</span> (url.endsWith(<span class="string">&quot;/&quot;</span>)) url.dropLast(<span class="number">1</span>) <span class="keyword">else</span> url</span><br><span class="line"></span><br><span class="line">val params: MutableMap&lt;String, String&gt; = HashMap()</span><br><span class="line">uri.queryParameterNames.forEach &#123;</span><br><span class="line">    <span class="type">val</span> <span class="variable">parameter</span> <span class="operator">=</span> uri.getQueryParameter(it)</span><br><span class="line">    params[it] = parameter</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">actions[action]?.invoke(params)</span><br></pre></td></tr></table></figure>
+<p>而我们根据 action 来判断调用的方法。<br>举个例子。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zhuyl://open_link/?url=https://baidu.com</span><br></pre></td></tr></table></figure>
+<p>通过我们的代码解析后，可以得到 action 为 “open_link”<br>那么</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">actions[<span class="string">&quot;open_link&quot;</span>] = &#123; params -&gt;</span><br><span class="line">   <span class="type">val</span> <span class="variable">intent</span> <span class="operator">=</span> Intent(application, SecondActivity::class.java)</span><br><span class="line">   <span class="type">val</span> <span class="variable">url</span> <span class="operator">=</span> params[<span class="string">&quot;url&quot;</span>]</span><br><span class="line">   intent.putExtra(<span class="string">&quot;url&quot;</span>, url)</span><br><span class="line">   intentToActivity(intent)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样做，我们在调用 url 启动 activity 的时候就可以拥有一种比较优雅的跳转方式了。<br>当然，从网页端发出的跳转也就可以处理了。</p>
+
+  </div>
+</article>
+
+
+
         
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                <span>归档</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                <span>标签</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                <span>关于</span>
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
-              <i class="iconfont icon-search"></i>
-            </a>
-          </li>
-          
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
-              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
-            </a>
-          </li>
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li>
         
       </ul>
     </div>
-  </div>
-</nav>
 
-  
-
-<div id="banner" class="banner" parallax=true
-     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
-  <div class="full-bg-img">
-    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-      <div class="banner-text text-center fade-in-up">
-        <div class="h2">
-          
-            <span id="subtitle" data-typed-text="有关于 Android 隐式启动 Activity"></span>
-          
-        </div>
-
-        
-          
-  <div class="mt-3">
-    
-    
-      <span class="post-meta">
-        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2017-07-01 14:35" pubdate>
-          2017年7月1日 下午
-        </time>
-      </span>
-    
-  </div>
-
-  <div class="mt-1">
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-chart"></i>
-        
-          2.3k 字
-        
-      </span>
-    
-
-    
-      <span class="post-meta mr-2">
-        <i class="iconfont icon-clock-fill"></i>
-        
-        
-        
-          19 分钟
-        
-      </span>
-    
-
-    
-    
-  </div>
-
-
-        
-      </div>
-
+    <div id="toc-footer" style="display: none">
       
     </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2017/07/01/about-intent/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&text=有关于 Android 隐式启动 Activity"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&is_video=false&description=有关于 Android 隐式启动 Activity"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=有关于 Android 隐式启动 Activity&body=Check out this article: http://zhuyilin10.github.io/2017/07/01/about-intent/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&title=有关于 Android 隐式启动 Activity"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2017/07/01/about-intent/&name=有关于 Android 隐式启动 Activity&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2017/07/01/about-intent/&t=有关于 Android 隐式启动 Activity"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
   </div>
 </div>
 
-</div>
-
-  </header>
-
-  <main>
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
-      
-
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-
-    </div>
-
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">有关于 Android 隐式启动 Activity</h1>
-            
-            
-              <div class="markdown-body">
-                
-                <p>忽然发现，半年没有更新过 Blog 了。。。。。<br>好尴尬，本来这个用来记录自己技术的平台是打算每月至少更新一两次，记录一下这段时间的收获的，可是由于懒散和换了电脑后环境的问题，一直没有继续写。<br>今天谈一下 Intent 的隐式启动。<br>这是一个很入门级的问题，但由于之前没用过所以也没管过，既然上周做了今天就写一下自己的体验。<br>Intent 是平时最常用的组件，我们平时用于页面跳转的就是显示 Intent。<br>例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">val</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> Intent(<span class="hljs-built_in">this</span>, SecondActivity::class.java)<br>intent.putExtra(<span class="hljs-string">&quot;.....&quot;</span>, ......)<br>startActivity(intent)<br></code></pre></td></tr></table></figure>
-<p>而隐式启动则是通过 url 的跳转来实现的。<br>首先是 url 的结构。<br>虽然我们不是做网页的但是我们要明白，一个完整的 url 是由哪几部分构成的。<br>url一般主要由Schema、Host、Path以及QueryParameter等构成。</p>
-<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs arcade"><span class="hljs-built_in">Schema</span> 访问协议<br><br>Host 域名<br><br>port 端口<br><br>pathName 路径名<br><br>QueryParameter 查询参数<br></code></pre></td></tr></table></figure>
-<p>我们使用 intent.data 可以接收到这个uri。<br>这里要提一下 uri 和 url 的区别。</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">首先，URI，是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。<br>而<span class="hljs-built_in">URL</span>是uniform resource locator，统一资源定位器，它是一种具体的URI，即<span class="hljs-built_in">URL</span>可以用来标识一个资源，而且还指明了如何locate这个资源。<br>而URN，uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。<br>也就是说，URI是以一种抽象的，高层次概念定义统一资源标识，而<span class="hljs-built_in">URL</span>和URN则是具体的资源标识的方式。<span class="hljs-built_in">URL</span>和URN都是一种URI。<br><br>在Java的URI中，一个URI实例可以代表绝对的，也可以是相对的，只要它符合URI的语法规则。而<span class="hljs-built_in">URL</span>类则不仅符合语义，还包含了定位该资源的信息，因此它不能是相对的，schema必须被指定。<br></code></pre></td></tr></table></figure>
-<p>我们使用 intent.data 接收到的是一个 Uri 的对象，我们可以通过该对象获取到我们需要的信息。<br>我的做法是建立一个 UrlDispatcher，在 application 中初始化，用来接受和处理 url。<br>要实现隐式跳转的第一步就是在清单文件中注册 Intent 过滤器。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs XML"><span class="hljs-tag">&lt;<span class="hljs-name">activity</span></span><br><span class="hljs-tag">   <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;.ui.common.account.UserNameActivity&quot;</span></span><br><span class="hljs-tag">   <span class="hljs-attr">android:launchMode</span>=<span class="hljs-string">&quot;singleTop&quot;</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">intent-filter</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">action</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.action.VIEW&quot;</span> /&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.BROWSABLE&quot;</span>/&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">category</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.intent.category.DEFAULT&quot;</span> /&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">data</span> <span class="hljs-attr">android:scheme</span>=<span class="hljs-string">&quot;zhuyl&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">intent-filter</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">activity</span>&gt;</span><br></code></pre></td></tr></table></figure>
-<p>这样我们就可以接收到域名协议为 zhuyl 的 url 了。<br>再来看看我们的 UrlDispatcher。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">var</span> actions: MutableMap&lt;String, (MutableMap&lt;String, String&gt;) -&gt; Unit&gt; = HashMap()<br><span class="hljs-type">val</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> uri.host + uri.path<br><span class="hljs-type">val</span> <span class="hljs-variable">action</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">if</span> (url.endsWith(<span class="hljs-string">&quot;/&quot;</span>)) url.dropLast(<span class="hljs-number">1</span>) <span class="hljs-keyword">else</span> url<br><br>val params: MutableMap&lt;String, String&gt; = HashMap()<br>uri.queryParameterNames.forEach &#123;<br>    <span class="hljs-type">val</span> <span class="hljs-variable">parameter</span> <span class="hljs-operator">=</span> uri.getQueryParameter(it)<br>    params[it] = parameter<br>&#125;<br><br>actions[action]?.invoke(params)<br></code></pre></td></tr></table></figure>
-<p>而我们根据 action 来判断调用的方法。<br>举个例子。</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">zhuyl:<span class="hljs-regexp">//</span>open_link<span class="hljs-regexp">/?url=https:/</span><span class="hljs-regexp">/baidu.com</span><br></code></pre></td></tr></table></figure>
-<p>通过我们的代码解析后，可以得到 action 为 “open_link”<br>那么</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">actions[<span class="hljs-string">&quot;open_link&quot;</span>] = &#123; params -&gt;<br>   <span class="hljs-type">val</span> <span class="hljs-variable">intent</span> <span class="hljs-operator">=</span> Intent(application, SecondActivity::class.java)<br>   <span class="hljs-type">val</span> <span class="hljs-variable">url</span> <span class="hljs-operator">=</span> params[<span class="hljs-string">&quot;url&quot;</span>]<br>   intent.putExtra(<span class="hljs-string">&quot;url&quot;</span>, url)<br>   intentToActivity(intent)<br>&#125;<br></code></pre></td></tr></table></figure>
-<p>这样做，我们在调用 url 启动 activity 的时候就可以拥有一种比较优雅的跳转方式了。<br>当然，从网页端发出的跳转也就可以处理了。</p>
-
-                
-              </div>
-            
-            <hr/>
-            <div>
-              <div class="post-metas my-3">
-  
-  
-    <div class="post-meta">
-      <i class="iconfont icon-tags"></i>
-      
-        <a href="/tags/Android/">#Android</a>
-      
-    </div>
-  
-</div>
-
-
-              
-  
-
-  <div class="license-box my-3">
-    <div class="license-title">
-      <div>有关于 Android 隐式启动 Activity</div>
-      <div>http://zhuyilin10.github.io/2017/07/01/about-intent/</div>
-    </div>
-    <div class="license-meta">
-      
-        <div class="license-meta-item">
-          <div>作者</div>
-          <div>Zhu Yilin</div>
-        </div>
-      
-      
-        <div class="license-meta-item license-meta-date">
-          <div>发布于</div>
-          <div>2017年7月1日</div>
-        </div>
-      
-      
-      
-        <div class="license-meta-item">
-          <div>许可协议</div>
-          <div>
-            
-              
-              
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
-                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
-                  </span>
-                </a>
-              
-            
-          </div>
-        </div>
-      
-    </div>
-    <div class="license-icon iconfont"></div>
+    
+    2016-2023
+    Zhu Yilin
   </div>
-
-
-
-              
-                <div class="post-prevnext my-3">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2017/09/12/about-oreo-1/" title="Android Oreo 新特性适配 —— Adaptive Icons">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Android Oreo 新特性适配 —— Adaptive Icons</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2016/12/31/about-my-career-2016/" title="2016年终总结">
-                        <span class="hidden-mobile">2016年终总结</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
-            </div>
-
-            
-          </article>
-        </div>
-      </div>
-    </div>
-
-    <div class="side-col d-none d-lg-block col-lg-2">
-      
-  <aside class="sidebar" style="margin-left: -1rem">
-    <div id="toc">
-  <p class="toc-header">
-    <i class="iconfont icon-list"></i>
-    <span>目录</span>
-  </p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-
-
-  </aside>
-
-
-    </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+     -->
+      </ul>
+    </nav>
   </div>
-</div>
+</footer>
 
-
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-    
-
-    
-      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
     </div>
-  </div>
-</div>
+    <!-- styles -->
 
-    
 
-    
-  </main>
 
-  <footer>
-    <div class="footer-inner">
-  
-    <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
-    </div>
-  
-  
-  
-  
-</div>
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
-  </footer>
 
-  <!-- Scripts -->
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
   
-  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
     })
+  })
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
-<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
+<script src="/js/main.js"></script>
 
+<!-- search -->
 
-  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var subtitle = document.getElementById('subtitle');
-      if (!subtitle || !typing) {
-        return;
-      }
-      var text = subtitle.getAttribute('data-typed-text');
-      
-        typing(text);
-      
-    })(window, document);
-  </script>
+<!-- Google Analytics -->
 
+<!-- Baidu Analytics -->
 
+<!-- Cloudflare Analytics -->
 
+<!-- Umami Analytics -->
 
-  
-    <script  src="/js/img-lazyload.js" ></script>
-  
+<!-- Disqus Comments -->
 
+<!-- utterances Comments -->
 
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
-    var toc = jQuery('#toc');
-    if (toc.length === 0 || !window.tocbot) { return; }
-    var boardCtn = jQuery('#board-ctn');
-    var boardTop = boardCtn.offset().top;
-
-    window.tocbot.init(Object.assign({
-      tocSelector     : '#toc-body',
-      contentSelector : '.markdown-body',
-      linkClass       : 'tocbot-link',
-      activeLinkClass : 'tocbot-active-link',
-      listClass       : 'tocbot-list',
-      isCollapsedClass: 'tocbot-is-collapsed',
-      collapsibleClass: 'tocbot-is-collapsible',
-      scrollSmooth    : true,
-      includeTitleTags: true,
-      headingsOffset  : -boardTop,
-    }, CONFIG.toc));
-    if (toc.find('.toc-list-item').length > 0) {
-      toc.css('visibility', 'visible');
-    }
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('tocbot' in window) {
-        tocbot.refresh();
-        var toc = jQuery('#toc');
-        if (toc.length === 0 || !tocbot) {
-          return;
-        }
-        if (toc.find('.toc-list-item').length > 0) {
-          toc.css('visibility', 'visible');
-        }
-      }
-    });
-  });
-</script>
-
-
-  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
-
-  <script>Fluid.plugins.codeWidget();</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
-    window.anchors.options = {
-      placement: CONFIG.anchorjs.placement,
-      visible  : CONFIG.anchorjs.visible
-    };
-    if (CONFIG.anchorjs.icon) {
-      window.anchors.options.icon = CONFIG.anchorjs.icon;
-    }
-    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-    var res = [];
-    for (var item of el) {
-      res.push('.markdown-body > ' + item.trim());
-    }
-    if (CONFIG.anchorjs.placement === 'left') {
-      window.anchors.options.class = 'anchorjs-link-left';
-    }
-    window.anchors.add(res.join(', '));
-
-    Fluid.events.registerRefreshCallback(function() {
-      if ('anchors' in window) {
-        anchors.removeAll();
-        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
-        var res = [];
-        for (var item of el) {
-          res.push('.markdown-body > ' + item.trim());
-        }
-        if (CONFIG.anchorjs.placement === 'left') {
-          anchors.options.class = 'anchorjs-link-left';
-        }
-        anchors.add(res.join(', '));
-      }
-    });
-  });
-</script>
-
-
-  
-<script>
-  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
-    Fluid.plugins.fancyBox();
-  });
-</script>
-
-
-  <script>Fluid.plugins.imageCaption();</script>
-
-  <script  src="/js/local-search.js" ></script>
-
-
-
-
-
-<!-- 主题的启动项，将它保持在最底部 -->
-<!-- the boot of the theme, keep it at the bottom -->
-<script  src="/js/boot.js" ></script>
-
-
-  
-
-  <noscript>
-    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
-  </noscript>
 </body>
 </html>
