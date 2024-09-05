@@ -14,7 +14,7 @@
 <meta property="og:description" content="好久好久没写 blog 了，上次写还是 2019 年，真是漫长的一段时间。 今天想记录一下如何编译 OpenCV Contrib for Android SDK。 作为一个对 NDK 和 C&#x2F;C++ 几乎完全不懂的人 最近在研究如何做一个很简单的事情 说起来就由公司研究 OpenCV 的同事写一段 C++ 的函数 调用 opencv 来实现某个功能 而我在 Android 和 iOS 端">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-03-20T02:48:47.000Z">
-<meta property="article:modified_time" content="2023-03-20T03:28:10.973Z">
+<meta property="article:modified_time" content="2023-03-20T03:28:10.970Z">
 <meta property="article:author" content="Zhu Yilin">
 <meta property="article:tag" content="android opencv ndk">
 <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
     
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -65,7 +65,7 @@
      --><!--
        --><li><a href="/archives/">归档</a></li><!--
      --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+       --><li><a href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
      -->
       </ul>
     </span>
@@ -87,17 +87,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&text=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&is_video=false&description=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&text=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&is_video=false&description=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=记录如何编译使用 OpenCV Contrib for Android SDK&body=Check out this article: http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&name=记录如何编译使用 OpenCV Contrib for Android SDK&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&t=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&name=记录如何编译使用 OpenCV Contrib for Android SDK&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&t=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -196,7 +196,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li>
+          <li><a href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li>
         
       </ul>
     </div>
@@ -207,17 +207,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&text=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&is_video=false&description=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&text=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&is_video=false&description=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=记录如何编译使用 OpenCV Contrib for Android SDK&body=Check out this article: http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&name=记录如何编译使用 OpenCV Contrib for Android SDK&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&t=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&title=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&name=记录如何编译使用 OpenCV Contrib for Android SDK&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2023/03/20/compile-opencv-contrib-sdk-for-Android/&t=记录如何编译使用 OpenCV Contrib for Android SDK"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -238,7 +238,7 @@
     Copyright &copy;
     
     
-    2016-2023
+    2016-2024
     Zhu Yilin
   </div>
   <div class="footer-right">
@@ -249,7 +249,7 @@
      --><!--
        --><li><a href="/archives/">归档</a></li><!--
      --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+       --><li><a href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
      -->
       </ul>
     </nav>

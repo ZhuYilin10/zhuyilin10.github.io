@@ -14,7 +14,7 @@
 <meta property="og:description" content="终于合并了上次做的 Adaptive Icon 的分支，但发现服务器跑不过去，一看是由于没有升级 gradle 等对应配置文件的问题。当升级过后，发现了一个很大的问题。我们早早使用了 SVG 作为图片资源文件，取代了体积较大的 .png 文件。一直以来的做法是 1234&lt;ImageView android:layout_width&#x3D;&quot;wrap_content&quot; andro">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2017-10-11T15:06:04.000Z">
-<meta property="article:modified_time" content="2023-03-20T02:44:47.296Z">
+<meta property="article:modified_time" content="2023-03-20T02:44:47.290Z">
 <meta property="article:author" content="Zhu Yilin">
 <meta property="article:tag" content="Android">
 <meta name="twitter:card" content="summary">
@@ -49,7 +49,7 @@
     
 	<!-- mathjax -->
 	
-<meta name="generator" content="Hexo 6.3.0"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
     
@@ -65,7 +65,7 @@
      --><!--
        --><li><a href="/archives/">归档</a></li><!--
      --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+       --><li><a href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
      -->
       </ul>
     </span>
@@ -89,17 +89,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2017/10/11/about-compat/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&text=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&is_video=false&description=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2017/10/11/about-compat/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&text=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&is_video=false&description=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=解决太坑的 svg 资源向下兼容性问题记录&body=Check out this article: http://zhuyilin10.github.io/2017/10/11/about-compat/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&name=解决太坑的 svg 资源向下兼容性问题记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2017/10/11/about-compat/&t=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&name=解决太坑的 svg 资源向下兼容性问题记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2017/10/11/about-compat/&t=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -156,7 +156,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &#x27;com.android.support:appcompat-v7:26.1.0&#x27;</span><br></pre></td></tr></table></figure>
 <p>第三步就是将 ImageView 属性设置为如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ImageView</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag"> <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span>          </span></span><br><span class="line"><span class="tag"> <span class="attr">app:srcCompat</span>=<span class="string">&quot;@drawable/xxxxxxxx&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>到此为低版本加载 SVG 的方法。当然 Android 5.0 以上不存在这个问题。<br>另外提一句，这一切是在 Activity 父类为 AppCompatActivity 的情况下进行，如果 Activity 继承自 Activity，那么应该使用 android.support.v7.widget.AppCompatImageView, 因为当使用 AppCompatActivity 时会自动将 ImageView 包装为 AppCompatImageView。<br>另一个问题就是 Textview 显示 SVG 图片的问题，这是使用比较多的地方，我们在使用 android:drawableRight 属性的时候会倒入 SVG 图像，但是这样做的结果就是低版本的奔溃。事实上，AppCompatTextView 是没有对 CompoundDrawable 进行适配的，所以我们的解决方法是代码手工写，判断系统版本如果小于5.0，就用 ContextCompat.getDrawable 获取到 Drawable 实例，再 setCompoundDrawablesWithIntrinsicBounds。建议自己定义一个 TextView，免去手写烦恼，为了节省时间，我用了一个开源库， <a target="_blank" rel="noopener" href="https://github.com/woxingxiao/VectorCompatTextView">VectorCompatTextView</a>，谢谢作者分享这个库。<br>当然我说的 ContextCompat.getDrawable 获取到 Drawable 实例然后赋值的方法是最好用的方法，当个别 XML 解决不了的时候, 如 ImageView 想设置 background 但没有那么一个叫做 backgroundCompat 属性的时候建议这样写。</p>
+<p>到此为低版本加载 SVG 的方法。当然 Android 5.0 以上不存在这个问题。<br>另外提一句，这一切是在 Activity 父类为 AppCompatActivity 的情况下进行，如果 Activity 继承自 Activity，那么应该使用 android.support.v7.widget.AppCompatImageView, 因为当使用 AppCompatActivity 时会自动将 ImageView 包装为 AppCompatImageView。<br>另一个问题就是 Textview 显示 SVG 图片的问题，这是使用比较多的地方，我们在使用 android:drawableRight 属性的时候会倒入 SVG 图像，但是这样做的结果就是低版本的奔溃。事实上，AppCompatTextView 是没有对 CompoundDrawable 进行适配的，所以我们的解决方法是代码手工写，判断系统版本如果小于5.0，就用 ContextCompat.getDrawable 获取到 Drawable 实例，再 setCompoundDrawablesWithIntrinsicBounds。建议自己定义一个 TextView，免去手写烦恼，为了节省时间，我用了一个开源库， <a href="https://github.com/woxingxiao/VectorCompatTextView">VectorCompatTextView</a>，谢谢作者分享这个库。<br>当然我说的 ContextCompat.getDrawable 获取到 Drawable 实例然后赋值的方法是最好用的方法，当个别 XML 解决不了的时候, 如 ImageView 想设置 background 但没有那么一个叫做 backgroundCompat 属性的时候建议这样写。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imageView.background = ContextCompat.getDrawable(context, R.drawable.xxxxxxxx)</span><br></pre></td></tr></table></figure>
 <p>当然今天只是简单记录一下，这几天有一些东西需要记录，包括多渠道打包配置文件，还有 Linux 安装体验，包括重装系统后恢复 blog 的记录。</p>
 
@@ -176,7 +176,7 @@
          
           <li><a href="/archives/">归档</a></li>
          
-          <li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li>
+          <li><a href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li>
         
       </ul>
     </div>
@@ -187,17 +187,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2017/10/11/about-compat/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&text=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&is_video=false&description=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://zhuyilin10.github.io/2017/10/11/about-compat/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&text=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&is_video=false&description=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=解决太坑的 svg 资源向下兼容性问题记录&body=Check out this article: http://zhuyilin10.github.io/2017/10/11/about-compat/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&name=解决太坑的 svg 资源向下兼容性问题记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2017/10/11/about-compat/&t=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&title=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://zhuyilin10.github.io/2017/10/11/about-compat/&name=解决太坑的 svg 资源向下兼容性问题记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://news.ycombinator.com/submitlink?u=http://zhuyilin10.github.io/2017/10/11/about-compat/&t=解决太坑的 svg 资源向下兼容性问题记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -218,7 +218,7 @@
     Copyright &copy;
     
     
-    2016-2023
+    2016-2024
     Zhu Yilin
   </div>
   <div class="footer-right">
@@ -229,7 +229,7 @@
      --><!--
        --><li><a href="/archives/">归档</a></li><!--
      --><!--
-       --><li><a target="_blank" rel="noopener" href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
+       --><li><a href="https://github.com/ZhuYilin10?tab=repositories">项目</a></li><!--
      -->
       </ul>
     </nav>
